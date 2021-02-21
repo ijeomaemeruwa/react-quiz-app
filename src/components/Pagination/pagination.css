@@ -1,0 +1,21 @@
+.pagination p {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #828282;
+    font-family: 'Rubik', sans-serif;
+}
+.prev {
+    border-right: 2px solid #828282;
+}
+
+.active {
+    color: #2d2d2d;
+}
+
+.pages {
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #828282;
+}

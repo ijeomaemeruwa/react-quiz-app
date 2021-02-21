@@ -1,0 +1,30 @@
+.app__btn-container {
+    max-width: 450px;
+    height: 45px; 
+}
+
+.custom__btn, 
+.facebook__btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.custom__btn {
+    background: var(--accent-main);
+}
+
+.facebook__btn {
+    background: #4267b2;
+}
+
+.custom__btn:hover,
+.facebook__btn:hover {
+    opacity: 0.8;
+}
