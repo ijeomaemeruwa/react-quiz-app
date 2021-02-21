@@ -3,12 +3,11 @@ import Card from 'react-bootstrap/Card';
 import { useSelector } from "react-redux";
 
 
-
 const Questions = ({ quiz, setCurrentAnswer, quizAnswers }) => {
 
 const { isAuthenticated, role } = useSelector((state) => state.user);
 
-const findCorrectAnswer = quiz.answers.find((answer) => answer.correct === true);
+const findCorrectAnswer = quiz.answers.find((answer) => answer);
 const correctAnswer = findCorrectAnswer.answer;
 
 const [radioValue, setRadioValue] = useState(" " | isAuthenticated && role === "Admin" ? correctAnswer : "")
@@ -31,16 +30,18 @@ return (
 <Card.Body className="card__details">
 <h5>{quiz.question}</h5>
 <div 
-onChange={isAuthenticated && role === "User" ? 
-    (value) => setRadioValue(value)
-    : undefined}
-    value={radioValue}
+// onChange={isAuthenticated && role === "User" ? 
+//     (value) => setRadioValue(value)
+//     : undefined}
+//     value={radioValue}
  >
- {quiz.answers.map(answer => (
+{
+ quiz.answers.map(answer => (
  <div key={answer.id}>
   <input 
     className="form-check-input" 
-    id="answer" type="radio" 
+    id="answer" 
+    type="radio" 
     value={answer.answer} 
     onChange={isAuthenticated && role === "User" ? (e) => {
         setCurrentAnswer({

@@ -22,35 +22,18 @@ useEffect(() => {
   setIsLoading(true)
   try{
     const fetchQuestions = async () => {
-    const response = await axios.get(apiURL,
-      {headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      }});
-
+    const response = await axios.get(apiURL);
     console.log(response);
     const quizData = response.data.data
     setQuestions(quizData);
     setIsLoading(false);
     }
   fetchQuestions()
-  }catch(error) {
+  } catch(error) {
     console.log(error);
+    setIsLoading(false);
   }
   }, []);
-
-
- 
-// Save Questions to LocalStorage
-useEffect(() => {
-  const storedQuestions = JSON.parse(localStorage.getItem('questions'));
-  if (storedQuestions) setQuestions(storedQuestions);
-}, [setQuestions]);
-
-useEffect(() => {
-  const questionList = JSON.stringify(questions);
-  localStorage.setItem('questions', questionList)
-}, [questions]);
 
   
 
@@ -73,7 +56,9 @@ return (
     <Spinner animation="border" variant="secondary" />
   )}
   </div>
-{questions.map(quiz => (
+{
+  questions.length > 1 &&
+  questions.map(quiz => (
   <QuizList 
     key={quiz.id} 
     question={quiz.questions} 
