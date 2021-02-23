@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import FormInput from '../../components/FormInput/FormInput';
 import AppButton from '../../components/AppButton/AppButton';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ const validate = values => {
 }
 
 
-const Login = (props) => {
+const Login = () => {
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -32,29 +32,39 @@ const Login = (props) => {
   })
 const [loading, setLoading] = useState(false);
 const dispatch = useDispatch();
+const history = useHistory();
 
 
 const handleLogin = (e) => {
   e.preventDefault();
-  const loginDetails = {
-    email: formik.values.email, 
-    password: formik.values.password 
-  }
   setLoading(true);
-  const response = dispatch(login(loginDetails));
-  if(response.error) {
-    toast.error('Error, please register or check input')
-    setLoading(false);
+  try{
+    const response = dispatch(login({
+      email: formik.values.email, 
+      password: formik.values.password 
+    }));
+      console.log(response)
+      history.push("/start")
+      toast.success('Successfully logged in!')
+      setLoading(false)
+  }catch(error) {
+    console.log({ ...error });
+    if(error.error === "Unauthorized") {
+      toast.error('Email or password incorrect!')
+      setLoading(false);
+    }else{
+      toast.error('An error occured, try again!');
+      setLoading(false);
+    }
   }
 }
+
 
 
 return (
 <>
 <section className="form__section">
-<Toaster 
-  position="bottom-center"
-/>
+<Toaster position="bottom-center" />
 <div className="form__container">
 <header>
   <p><Link to="/" className="auth_link">Home</Link></p>
@@ -66,12 +76,12 @@ return (
 <Form className="form mx-auto" onSubmit={handleLogin}>
 <Form.Group>
 <FormInput 
-    type="email"
-    id="email"  
-    name="email"
-    value={formik.values.email}
-    onChange={formik.handleChange} 
-    placeholder="Email Address"
+  type="email"
+  id="email"  
+  name="email"
+  value={formik.values.email}
+  onChange={formik.handleChange} 
+  placeholder="Email Address"
 />
 {
  formik.errors.email ? 

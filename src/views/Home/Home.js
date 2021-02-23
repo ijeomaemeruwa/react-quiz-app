@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header';
 import './home.css';
 import {Link} from 'react-router-dom';
 
+
 const Home = () => {
 return (
 <>
@@ -11,9 +12,10 @@ return (
     <Link to="/login">
     <button>Log in</button> 
     </Link> 
-</div>  
+</div> 
 </>
 )
 }
+
 
 export default Home;

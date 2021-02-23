@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Spinner from 'react-bootstrap/Spinner';
 import FormInput from "../../components/FormInput/FormInput";
 import AppButton from "../../components/AppButton/AppButton";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { useDispatch } from "react-redux";
@@ -35,7 +35,7 @@ const validate = values => {
 };
 
 
-const Register = (props) => {
+const Register = () => {
 const formik = useFormik({
   initialValues: {
     firstName: '',
@@ -48,11 +48,11 @@ const formik = useFormik({
 })
 const [loading, setLoading] = useState(false); 
 const dispatch = useDispatch();
+const history = useHistory();
  
 
 const handleRegisteration = (e) => {
   e.preventDefault();
-
   const newUser = {
     firstName: formik.values.firstName,
     lastName: formik.values.lastName,
@@ -60,16 +60,19 @@ const handleRegisteration = (e) => {
     password: formik.values.password,
     password_confirmation: formik.values.password_confirmation
   }
+  try {
   setLoading(true);
-  const response = dispatch(register(newUser));
-  if(response.message) {
-    toast.success('Registration successful')
-    props.history.push("/login");
+    dispatch(register(newUser));
+    toast.success('Registeration successful!')
     setLoading(false);
-  }
-  if (response.error) {
-    toast.error('Error, try again!')
-  }
+    history.push("/login");
+  } catch(error) {
+    if (error === "This email has already been taken") {
+      toast.error('User aleady exists!')
+    } else {
+      toast.error('An error occurred, try again!')
+    }
+  }  
 };
 
   

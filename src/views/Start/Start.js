@@ -3,9 +3,13 @@ import Header from '../../components/Header/Header';
 import AppButton from '../../components/AppButton/AppButton';
 import Card from 'react-bootstrap/Card';
 import {Link} from 'react-router-dom';
+import {logOut} from '../../redux/features/user/userSlice';
+import { useDispatch } from "react-redux";
 
 
 const Home = () => {
+const dispatch = useDispatch();
+
 return (
 <>
 <Header />
@@ -14,7 +18,7 @@ return (
 <Card.Body className="card__details py-5 px-3">
 <p>
     This is a timed quiz consisting of 10 questions. You are required to
-    complete the quiz within 10 minutes before the page time off.
+    complete the quiz within the allocated time before the page time off.
     If you fail to complete the quiz before the allotted time, the quiz will time
     off at the end of the alloted time, thereby ending the quiz abruptly and rendering 
     yoir attempt invalid.
@@ -23,10 +27,16 @@ return (
     Goodluck!
 </p>
 
-<div>
+<div className="d-flex mx-auto justify-content-around">
 <Link to="/quiz">
 <AppButton>Start Quiz</AppButton>
 </Link>
+
+<div className=".app__btn-container">
+<button onClick={() => {dispatch(logOut())}} className="custom__btn">
+  Log out
+</button>
+</div>
 </div>
 
 </Card.Body>
