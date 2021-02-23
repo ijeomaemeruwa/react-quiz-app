@@ -1,66 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import './pagination.css';
+import React from 'react';
 
-const Pagination = 
-({  total, 
-    questionsPerPage, 
-    currentPage, 
-    setCurrentPage, 
-    handlePagination 
-}) => {
-
-
-const [totalPages, setTotalPages] = useState(0);
-const [pageNumberLimit] = useState(3);
-const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(2);
-const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
-
-useEffect(() => {
-if(total > 0 && questionsPerPage > 0)
-    setTotalPages( Math.ceil(total / questionsPerPage));
-}, [total, questionsPerPage]);
-
-const pages = [];
-for(let i = 1; i <= totalPages; i++) {
-  pages.push(i)
-}
-
-//handle Next and Previous State
-const handlePrev = () => {
-setCurrentPage(currentPage - 1);
-if((currentPage - 1) % pageNumberLimit === 0){
-    setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-    setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
-}
-}
-  
-const handleNext = () => {
-setCurrentPage(currentPage + 1);
-if(currentPage + 1 > maxPageNumberLimit){
-    setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-    setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
-}
-}
-
-
+const Pagination = ({ currentPage, totalPages, handlePrev, handleNext }) => {
 return (
 <>
-<div>
-  <p 
-    onClick={handlePrev} 
-    disabled={currentPage === pages[0] ? true : false}
-    className="pr-2 prev">
-    Prev
-   </p>
-   <p 
-    onClick={handleNext} 
-    className="pl-2"
-    disabled={currentPage === pages[totalPages - 1] ? true : false}>
-    Next
-  </p>  
-  </div>      
+<footer>
+  <div className="d-flex justify-content-around mx-auto align-items-center">
+  <div className="pages">
+    <p>Page {currentPage} of {totalPages}</p>
+  </div>
+
+  <div className="d-flex align-items-center pagination">
+    {currentPage > 1 && (
+     <p onClick={handlePrev} className="prev pr-2">Prev</p>
+    )}
+    {currentPage !== totalPages && (
+     <p onClick={handleNext} className="next">Next</p>
+    )}
+  </div>
+  </div>
+</footer> 
 </>
-)
+    )
 }
 
-export default Pagination;
+export default Pagination

@@ -5,7 +5,7 @@ const Header = () => {
 return (
 <>
 <header>
-<Card className="mx-auto my-5 card__container">
+<Card className="mx-auto mt-5 mb-3 card__container">
 <Card.Body className="card__body">
     <Card.Title className="card__title">
     Quiz App

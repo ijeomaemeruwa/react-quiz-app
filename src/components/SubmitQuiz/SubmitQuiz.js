@@ -1,11 +1,15 @@
 import React from 'react';
 import './submitquiz.css';
+import Spinner from 'react-bootstrap/Spinner';
 
-const SubmitQuiz = ({ submit }) => {
+const SubmitQuiz = ({ submit, loading }) => {
 return (
-<div className="submitquiz__btn d-flex justify-content-center mx-auto mb-5">
+<div className="submitquiz__btn">
  <button onClick={submit}>
-    Submit
+ { loading ? 
+  (<Spinner animation="border" variant="light" />) : 
+  (<span>Submit</span>)
+ }
  </button>  
 </div>
 )
