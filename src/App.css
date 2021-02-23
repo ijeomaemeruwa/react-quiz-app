@@ -110,3 +110,15 @@ small {
 .logout__btn button:hover {
     box-shadow: none;
 }
+
+.prev, .next {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #828282;
+    font-family: 'Rubik', sans-serif;
+}
+
+.prev {
+    border-right: 2px solid #c4a0a0;
+}
