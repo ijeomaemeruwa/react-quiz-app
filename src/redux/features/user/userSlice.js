@@ -3,19 +3,6 @@ import {history} from '../utils/history';
 import {setAuthToken} from '../utils/setAuthToken';
 import axios from 'axios';
 
-// const User = {
-//   email: "",
-//   password: ""
-// }
-
-// const newUser = {
-//   firstName: "",
-//   lastName: "",
-//   email: "",
-//   password: "",
-//   password_confirmation: ""
-// }
-
 
 export const register = createAsyncThunk(
   "user/register",
@@ -66,7 +53,8 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
       isAuthenticated: false,
-      role: ""
+      role: "",
+      loading: false
     },
     reducers: {
     setCurrentUser(state, action) {
@@ -79,17 +67,29 @@ const userSlice = createSlice({
     },
     },
     extraReducers: {
+      [register.pending]: (state) => {
+        state.isAuthenticated = false;
+        state.loading = true
+      },
       [register.fulfilled]: (state) => {
         state.isAuthenticated = true;
+        state.loading = false
       },
       [register.rejected]: (state) => {
         state.isAuthenticated = false;
+        state.loading = false
+      },
+      [login.pending]: (state) => {
+        state.isAuthenticated = false;
+        state.loading = true
       },
       [login.fulfilled]: (state) => {
         state.isAuthenticated = true;
+        state.loading = false
       },
       [login.rejected]: (state) => {
         state.isAuthenticated = false;
+        state.loading = false
       }
       }
 })

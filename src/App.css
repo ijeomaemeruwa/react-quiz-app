@@ -110,8 +110,13 @@ small {
 .logout__btn button:hover {
     box-shadow: none;
 }
+.timer p {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent-main);
+}
 
-.prev, .next {
+/* .prev, .next {
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
@@ -121,4 +126,4 @@ small {
 
 .prev {
     border-right: 2px solid #c4a0a0;
-}
+} */

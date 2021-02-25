@@ -38,8 +38,7 @@ return (
   }
   </Route>
   <Route exact path="/quiz">
-  {
-    isAuthenticated && role === "User" ? <Quiz /> :  
+  {isAuthenticated && role === "User" ? <Quiz /> :  
     (<Redirect to="/" />)
   }
   </Route>

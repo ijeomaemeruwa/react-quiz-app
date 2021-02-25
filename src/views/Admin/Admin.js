@@ -6,12 +6,11 @@ import Header from '../../components/Header/Header';
 import SetTimerModal from '../../components/SetTimerModal/SetTimerModal';
 import Card from 'react-bootstrap/Card';
 import {logOut} from '../../redux/features/user/userSlice';
-import { useDispatch } from "react-redux";
-import { AiFillHome } from 'react-icons/ai'
+import {useDispatch} from "react-redux";
+import {AiFillHome} from 'react-icons/ai'
 import {BsTrashFill} from 'react-icons/bs'
 import {RiTimerFill} from 'react-icons/ri'
-import toast, { Toaster } from 'react-hot-toast';
-import {InputGroup} from 'react-bootstrap';
+import toast, {Toaster} from 'react-hot-toast';
 
 
 const Admin = () => {
@@ -51,7 +50,6 @@ const Admin = () => {
         toast.success('Question added successfully');
         setQuestionValue("")
         setOptions([])
-
       }catch(error){
         console.log(error);
         toast.error('Error, try again')
@@ -66,7 +64,7 @@ return (
 <Toaster position="bottom-center" />
 <section>
 <div className="logout__btn d-flex justify-content-center mx-auto">
-  <button onClick={() => {dispatch(logOut());}}>
+  <button onClick={() => {dispatch(logOut())}}>
     Log out
   </button>
 </div>
@@ -81,10 +79,10 @@ return (
   value={questionvalue}
   onChange={(e) => setQuestionValue(e.target.value)}
   onKeyUp={(e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      setQuestionValue("");
-      setQuestion(questionvalue);
+    if(e.key === "Enter"){
+      e.preventDefault()
+      setQuestionValue("")
+      setQuestion(questionvalue)
     }
   }}
   className="add_quiz mb-3" 
@@ -109,7 +107,7 @@ return (
 ))
 }
 </div>
-<InputGroup>
+
 <input 
   placeholder="Add Options"
   type="text"
@@ -128,9 +126,9 @@ return (
     }
   }}
 />
-</InputGroup>
-
 </div>
+
+
 <div className="submit__btn">
 <button onClick={handleSubmit}>Submit</button>
 </div>

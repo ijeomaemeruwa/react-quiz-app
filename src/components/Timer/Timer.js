@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {secondsToTime} from '../../components/utils/secondsToTime';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Timer = ({ totalTime, submit }) => {
@@ -43,7 +44,7 @@ useEffect(() => {
       if (minutes === 0) {
         if (hours === 0) {
           submit();
-          //toast(Times up, question submitted)
+          toast.success("Times up, question submitted")
       }
     }
   }
@@ -52,25 +53,21 @@ useEffect(() => {
 
   useEffect(() => {
     if (hours === 0 && minutes === 1 && seconds === 0) {
-      //toast("Test will automatically submit in 1 minute);
+    toast("Test will automatically submit in 1 minute")
     }
   }, [seconds, minutes, hours]);
 
 return (
-<div className="timer__container d-flex flex-column">
- <div className="timer d-flex flex-row align-items-center pb-1">
-  <p>{hours < 10 ? `0${hours}` : hours}</p> 
+<>
+<Toaster position="bottom-center" />
+ <div className="timer d-flex flex-row align-items-center">
+  <p>{hours < 10 ? `${hours}` : hours}</p> 
   <p>:</p>
   <p>{minutes < 10 ? `0${minutes}` : minutes}</p>
   <p>:</p>
   <p>{seconds < 10 ? `0${seconds}` : seconds}</p> 
  </div>
- <div className="timer d-flex flex-row align-items-center">
-   <small>Hours</small>
-   <small>Mins</small>
-   <small>Secs</small>
- </div>
-</div>
+</>
 )
 }
 

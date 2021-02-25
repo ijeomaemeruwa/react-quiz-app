@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import FormInput from '../../components/FormInput/FormInput';
@@ -6,8 +6,9 @@ import AppButton from '../../components/AppButton/AppButton';
 import {Link, useHistory} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/features/user/userSlice";
+// import {history} from "../../redux/features/utils/history";
 
 
 const validate = values => {
@@ -30,31 +31,32 @@ const Login = () => {
     },
     validate
   })
-const [loading, setLoading] = useState(false);
+// const [loading, setLoading] = useState(false);
+const { loading } = useSelector(state => state.user)
 const dispatch = useDispatch();
-const history = useHistory();
+const history = useHistory()
 
 
 const handleLogin = (e) => {
   e.preventDefault();
-  setLoading(true);
   try{
     const response = dispatch(login({
       email: formik.values.email, 
       password: formik.values.password 
     }));
-      console.log(response)
       history.push("/start")
       toast.success('Successfully logged in!')
-      setLoading(false)
+      console.log(response)
   }catch(error) {
     console.log({ ...error });
+    if(error.status === 422){
+      toast.error('Fields must not be empty')
+    }
     if(error.error === "Unauthorized") {
       toast.error('Email or password incorrect!')
-      setLoading(false);
-    }else{
+    }
+    if(error){
       toast.error('An error occured, try again!');
-      setLoading(false);
     }
   }
 }
@@ -106,8 +108,8 @@ return (
 <br />
 <div>
 <AppButton>
-{ loading ? 
-  (<Spinner animation="border" variant="light" />) : 
+{ loading ?
+  (<Spinner animation="border" variant="light" />) :
   (<span>Log in</span>)
 }
 </AppButton>

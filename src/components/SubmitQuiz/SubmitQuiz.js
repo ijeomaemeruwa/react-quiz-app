@@ -2,10 +2,10 @@ import React from 'react';
 import './submitquiz.css';
 import Spinner from 'react-bootstrap/Spinner';
 
-const SubmitQuiz = ({ submit, loading }) => {
+const SubmitQuiz = ({ handleSubmit, loading }) => {
 return (
 <div className="submitquiz__btn">
- <button onClick={submit}>
+ <button onClick={handleSubmit}>
  { loading ? 
   (<Spinner animation="border" variant="light" />) : 
   (<span>Submit</span>)
