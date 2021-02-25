@@ -72,6 +72,7 @@ return (
 <Card className="mx-auto my-5 card__container">
 <Card.Body className="card__details px-3 pt-5">
 <div className="admin__input">
+
 <div>
   <p className="pl-3">{question}</p>
 <input  
@@ -99,10 +100,10 @@ return (
     id="answers" 
     className="form-check-input mb-3 p-3" 
     style={{ width: '30px'}}
-    onChange={setRadioValue} 
+    onClick={(e) => setRadioValue(e.target.value)} 
     value={radioValue} 
   />
-  <label htmlFor="answers" className="pl-3">{option}</label>
+  <label htmlFor="answers" value ={option} className="pl-3">{option}</label>
   </span>
 ))
 }

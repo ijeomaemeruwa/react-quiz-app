@@ -31,8 +31,8 @@ const Login = () => {
     },
     validate
   })
-// const [loading, setLoading] = useState(false);
-const { loading } = useSelector(state => state.user)
+
+const {loading} = useSelector(state => state.user)
 const dispatch = useDispatch();
 const history = useHistory()
 
@@ -44,9 +44,11 @@ const handleLogin = (e) => {
       email: formik.values.email, 
       password: formik.values.password 
     }));
-      history.push("/start")
+    console.log(response)
+    if(loading === false) {
       toast.success('Successfully logged in!')
-      console.log(response)
+      history.push("/start")
+    }    
   }catch(error) {
     console.log({ ...error });
     if(error.status === 422){
@@ -108,7 +110,7 @@ return (
 <br />
 <div>
 <AppButton>
-{ loading ?
+{ loading === true ?
   (<Spinner animation="border" variant="light" />) :
   (<span>Log in</span>)
 }

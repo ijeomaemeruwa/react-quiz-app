@@ -1,28 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { InputGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 
+// value={quiz.answer} 
+  // onChange={() => {setAnswers({
+  //     questionId: quiz.questionId, 
+  //     selectedAnswer: quiz.id
+  //   })}
+
 
 const QuizList = ({ question, setAnswers, userAnswers }) => {
-  // const getAnswer = question.answers.find((answer) => answer.correct === true) //find correct answer
-
   const [radioValue, setRadioValue] = useState("");
 
+
   useEffect(() => {
-    const currentAnswer = userAnswers.find((answer) => answer.questionId === question.id)
-
-    if(currentAnswer) {
-      const selectedAnswer = question.answers.find((answer) => answer.id === currentAnswer.selectedAnswer);
-
-    if(selectedAnswer) setRadioValue(selectedAnswer.answer)  
-    }
+      const currentAnswer = userAnswers.find((answer) => answer.questionId === question.id);
+      if (currentAnswer) {
+        const selectedAnswer = question.answers.find((answer) => answer.id === currentAnswer.selectedAnswer
+        );
+      if (selectedAnswer) setRadioValue(selectedAnswer.answer);
+      }
   }, [question, userAnswers]);
-
-
-  const handleChange = (e) => {
-    setRadioValue(e.target.id)
-  }
-
 
 return (
 <div>
@@ -30,22 +28,20 @@ return (
 <Card.Body className="card__details">
 <h5>{question.question}</h5>
 
+
 <InputGroup className="d-flex flex-column">
 {
   question.answers.map(quiz => (
   <div key={quiz.id} >
-  <label htmlFor="answers" className="pl-2" 
-  value={quiz.answer} 
-  onChange={() => {setAnswers({
-      questionId: quiz.questionId, 
-      selectedAnswer: quiz.id
-    })} 
-  }>
+  <label htmlFor={quiz.answer} className="pl-2">
   <input 
     className="mr-2"
     type="radio" 
-    id="answers"
-    onChange={handleChange}
+    id={quiz.answer}
+    onClick={() => setAnswers({
+      questionId: quiz.questionId,
+      selectedAnswer: quiz.id
+      })}
     value={radioValue}
   />
   {quiz.answer}
