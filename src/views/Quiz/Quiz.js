@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {history} from '../../redux/features/utils/history';
 import {fetchQuizData} from '../../redux/features/quiz/quizSlice';
 import Header from '../../components/Header/Header';
-// import SubmitQuiz from '../../components/SubmitQuiz/SubmitQuiz';
 import Timer from '../../components/Timer/Timer';
 import QuizList from './QuizList';
 import Spinner from 'react-bootstrap/Spinner';
@@ -75,6 +74,7 @@ const handleSubmit = async (e) => {
     setSubmitting(false)
   }
 }
+
 
 // const checkSubmit = () => {
 //     if (userAnswers.length < quizData.totalQuestions) {
