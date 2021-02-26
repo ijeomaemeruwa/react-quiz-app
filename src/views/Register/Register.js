@@ -69,9 +69,7 @@ const handleRegisteration = (e) => {
   } catch(error) {
     if (error === "This email has already been taken") {
       toast.error('User aleady exists!')
-    } else {
-      toast.error('An error occurred, try again!')
-    }
+    } 
   }  
 };
 
