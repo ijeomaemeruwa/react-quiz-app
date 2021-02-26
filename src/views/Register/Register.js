@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Spinner from 'react-bootstrap/Spinner';
 import FormInput from "../../components/FormInput/FormInput";
 import AppButton from "../../components/AppButton/AppButton";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { useDispatch } from "react-redux";
@@ -35,7 +35,7 @@ const validate = values => {
 };
 
 
-const Register = () => {
+const Register = (props) => {
 const formik = useFormik({
   initialValues: {
     firstName: '',
@@ -48,7 +48,7 @@ const formik = useFormik({
 })
 const [loading, setLoading] = useState(false); 
 const dispatch = useDispatch();
-const history = useHistory();
+// const history = useHistory();
  
 
 const handleRegisteration = (e) => {
@@ -63,9 +63,9 @@ const handleRegisteration = (e) => {
   try {
   setLoading(true);
     dispatch(register(newUser));
+    props.history.push("/login");
     toast.success('Registeration successful!')
     setLoading(false);
-    history.push("/login");
   } catch(error) {
     if (error === "This email has already been taken") {
       toast.error('User aleady exists!')

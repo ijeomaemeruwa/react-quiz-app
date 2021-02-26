@@ -33,7 +33,7 @@ return (
   <Route exact path="/start">
   {
     isAuthenticated && role === "User" ? <Start /> : 
-    isAuthenticated && role === "Admin" ? <Redirect to="/" /> : 
+    isAuthenticated && role === "Admin" ? <Redirect to="/Admin" /> : 
     (<Redirect to="/login" />)
   }
   </Route>

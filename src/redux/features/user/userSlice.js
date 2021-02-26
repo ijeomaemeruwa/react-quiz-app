@@ -14,7 +14,7 @@ export const register = createAsyncThunk(
       );
       if (res.data.message === "User successfully registered")
       return { message: res.data.message };
-      history.push("/login");
+      // history.push("/login");
     } catch (error) {
       return { error: error.data.message };
     }
@@ -89,7 +89,6 @@ const userSlice = createSlice({
       },
       [login.rejected]: (state) => {
         state.isAuthenticated = false;
-        state.loading = false
       }
       }
 })
@@ -98,9 +97,9 @@ const userSlice = createSlice({
 export const logOut = () => (dispatch) => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("role");
+  history.push("/login");
   setAuthToken("");
   dispatch(setCurrentUser(""));
-  history.push("/login");
 };
 
 

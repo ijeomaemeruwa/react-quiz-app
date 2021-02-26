@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import FormInput from '../../components/FormInput/FormInput';
 import AppButton from '../../components/AppButton/AppButton';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const validate = values => {
 }
 
 
-const Login = () => {
+const Login = (props) => {
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -34,7 +34,7 @@ const Login = () => {
 
 const {loading} = useSelector(state => state.user)
 const dispatch = useDispatch();
-const history = useHistory()
+// const history = useHistory()
 
 
 const handleLogin = (e) => {
@@ -45,10 +45,9 @@ const handleLogin = (e) => {
       password: formik.values.password 
     }));
     console.log(response)
-    if(loading === false) {
       toast.success('Successfully logged in!')
-      history.push("/start")
-    }    
+      //props.history.push("/start")
+      
   }catch(error) {
     console.log({ ...error });
     if(error.status === 422){
@@ -56,9 +55,6 @@ const handleLogin = (e) => {
     }
     if(error.error === "Unauthorized") {
       toast.error('Email or password incorrect!')
-    }
-    if(error){
-      toast.error('An error occured, try again!');
     }
   }
 }
