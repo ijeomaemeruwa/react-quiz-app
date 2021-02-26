@@ -6,12 +6,13 @@ import "antd/dist/antd.css";
 
 
 const SetTimerModal = (props) => {
+
 const [time, setTime] = useState();
 
 return (
 <>
 <Modal 
-    {...props} 
+    {...props}
     size="md"  
     aria-labelledby="contained-modal-title-vcenter"
     centered
@@ -19,13 +20,13 @@ return (
     <Modal.Header>Set Timer</Modal.Header>
     <Modal.Body>
     <TimePicker
-    showNow={false}
-    value={time}
-    size="large"
-    style={{ width: "100%" }}
-    onChange={(time, timeString) => {
+     showNow={false}
+     value={time}
+     size="large"
+     style={{ width: "100%" }}
+     onChange={(time, timeString) => {
         setTime(time);
-        props.setTimeString(timeString);
+        props.setTimer(timeString);
     }}
     />
     </Modal.Body>
@@ -33,7 +34,7 @@ return (
     <p 
      onClick={props.onHide} 
      style={{ cursor: 'pointer', color: 'var(--accent-main)', fontWeight: '600'}}>
-     Close
+     SET
     </p>
     </Modal.Footer>
     </Modal>

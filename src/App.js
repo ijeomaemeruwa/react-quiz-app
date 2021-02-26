@@ -20,9 +20,11 @@ return (
 <Router>
 <Switch>
   <Route exact path="/"><Home /></Route>
+
   <Route exact path="/register">
    {isAuthenticated ? <Redirect to="/login" /> : <Register />}
   </Route>
+
   <Route exact path="/login">
    {
     isAuthenticated && role === "User" ? <Redirect to="/start" /> : 

@@ -73,6 +73,7 @@ return (
 <Card.Body className="card__details px-3 pt-5">
 <div className="admin__input">
 
+{/* Question */}
 <div>
   <p className="pl-3">{question}</p>
 <input  
@@ -91,24 +92,31 @@ return (
 />
 </div>
 
+{/* Options and Answer */}
 <div>
 {
   options.map((option, index) => (
   <span key={index} className="form-check d-flex align-items-center">
   <input 
     type="radio"  
-    id="answers" 
+    id={index} 
+    name={index}
     className="form-check-input mb-3 p-3" 
     style={{ width: '30px'}}
-    onClick={(e) => setRadioValue(e.target.value)} 
+    onChange={(e) => setRadioValue(e.target.value)} 
     value={radioValue} 
   />
-  <label htmlFor="answers" value ={option} className="pl-3">{option}</label>
+  <label 
+    htmlFor={index} 
+    value={option}  
+    className="pl-3"
+    >
+    {option}
+  </label>
   </span>
 ))
 }
 </div>
-
 <input 
   placeholder="Add Options"
   type="text"
@@ -156,7 +164,7 @@ return (
   onHide={() => setModalShow(false)}
   show={modalShow} 
   timeString={timeString}
-  setTimeString={setTimeString}
+  setTimer={setTimeString}
 />
 </section>               
 </>
@@ -165,4 +173,3 @@ return (
 
 
 export default Admin;
-

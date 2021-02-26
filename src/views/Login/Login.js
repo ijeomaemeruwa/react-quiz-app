@@ -46,7 +46,7 @@ const handleLogin = (e) => {
     }));
     console.log(response)
       toast.success('Successfully logged in!')
-      //props.history.push("/start")
+      props.history.push("/start")
       
   }catch(error) {
     console.log({ ...error });

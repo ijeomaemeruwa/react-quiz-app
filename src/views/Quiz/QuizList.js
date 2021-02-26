@@ -12,6 +12,9 @@ import Card from 'react-bootstrap/Card';
 const QuizList = ({ question, setAnswers, userAnswers }) => {
   const [radioValue, setRadioValue] = useState("");
 
+  const handleChange = (e) => {
+    setRadioValue(e.target.value)
+  }
 
   useEffect(() => {
       const currentAnswer = userAnswers.find((answer) => answer.questionId === question.id);
@@ -22,6 +25,7 @@ const QuizList = ({ question, setAnswers, userAnswers }) => {
       }
   }, [question, userAnswers]);
 
+
 return (
 <div>
 <Card className="card__container mx-auto mb-3">
@@ -31,20 +35,25 @@ return (
 
 <InputGroup className="d-flex flex-column">
 {
-  question.answers.map(quiz => (
-  <div key={quiz.id} >
-  <label htmlFor={quiz.answer} className="pl-2">
+  question.answers.map(answer => (
+  <div key={answer.id} >
+  <label 
+    htmlFor={answer.id} 
+    className="pl-2"
+    value={answer.answer} 
+    onChange={() => setAnswers({
+      questionId: answer.questionId,
+      selectedAnswer: answer.id
+    })}>
   <input 
     className="mr-2"
     type="radio" 
-    id={quiz.answer}
-    onClick={() => setAnswers({
-      questionId: quiz.questionId,
-      selectedAnswer: quiz.id
-      })}
+    id={answer.id}
+    name={answer.questionId}
+    onChange={handleChange}
     value={radioValue}
   />
-  {quiz.answer}
+  {answer.answer}
   </label> 
   </div>
   ))
