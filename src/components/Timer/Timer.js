@@ -63,7 +63,7 @@ return (
  <div className="timer d-flex flex-row align-items-center">
   <p>{hours < 10 ? `${hours}` : hours}</p> 
   <p>:</p>
-  <p>{minutes < 10 ? `0${minutes}` : minutes}</p>
+  <p>{minutes < 10 ? `${minutes}` : minutes}</p>
   <p>:</p>
   <p>{seconds < 10 ? `0${seconds}` : seconds}</p> 
  </div>
